@@ -32,7 +32,7 @@ Each server has it's own subdirectory of `/opt/minecraft`. This means that when 
     cd paper
     echo 'eula=true' > eula.txt
 
-3. Upload your files to the `/opt/minecraft/paper` directory from [this PaperMC page](https://papermc.io/downloads) by copying the address of the latest build and download (today is #416):
+3. Upload your files to the `/opt/minecraft/paper` directory from [this PaperMC page](https://papermc.io/downloads) by copying the address of the latest build and download (today is #416, 1.16.4 version):
 ```bash
 wget https://papermc.io/api/v2/projects/paper/versions/1.16.4/builds/416/downloads/paper-1.16.4-416.jar
  ```
@@ -40,7 +40,7 @@ wget https://papermc.io/api/v2/projects/paper/versions/1.16.4/builds/416/downloa
 
 ```bash
     chown -R minecraft:minecraft /opt/minecraft
-    ```
+```
 
 ### RAM allocation
 
@@ -52,6 +52,13 @@ With `mc@.service` it's possible to specify the RAM allocation per server. This 
 # /opt/minecraft/papermc/server.conf
 MCMINMEM=512M
 MCMAXMEM=2048M
+```
+### CPU cores
+
+Set the number of used CPU cores:
+
+```properties
+PARALLEL_THREADS=2
 ```
 
 ## Usage
