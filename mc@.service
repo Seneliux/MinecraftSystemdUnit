@@ -30,7 +30,7 @@ ProtectControlGroups=true
 # Implies MountAPIVFS=yes
 
 # Set default memory values
-Environment="MCMINMEM=512M" "MCMAXMEM=1024M" "SHUTDOWN_DELAY=5" "POST_SHUTDOWN_DELAY=10"
+Environment="MCMINMEM=512M" "MCMAXMEM=3G" "SHUTDOWN_DELAY=5" "POST_SHUTDOWN_DELAY=10" "PARALLEL_THREADS=4"
 # Change memory values in environment file
 EnvironmentFile=-/opt/minecraft/%i/server.conf
 
@@ -52,9 +52,18 @@ ExecStart=/bin/sh -c \
           -Xmx${MCMAXMEM} \
           -XX:+UseG1GC \
           -XX:+CMSClassUnloadingEnabled \
-          -XX:ParallelGCThreads=2 \
-          -XX:MinHeapFreeRatio=5 \
-          -XX:MaxHeapFreeRatio=10 \
+          -XX:ParallelGCThreads=${PARALLEL_THREADS} \
+          -XX:+UnlockExperimentalVMOptions \
+          -XX:MaxGCPauseMillis=100 \
+          -XX:+DisableExplicitGC \
+          -XX:TargetSurvivorRatio=90 \
+          -XX:G1NewSizePercent=50 \
+          -XX:G1MaxNewSizePercent=80 \
+          -XX:G1MixedGCLiveThresholdPercent=50 \
+          -XX:+AlwaysPreTouch \
+          -XX:+UseLargePages \
+          -XX:+UseLargePagesInMetaspace \
+          -XX:LargePageSizeInBytes=2m \
           -jar {} \
           nogui'
 
