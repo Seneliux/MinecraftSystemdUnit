@@ -1,0 +1,4 @@
+[Minecraft]
+title=Minecraft server
+description= A sandbox construction game 
+ports=25565/tcp
