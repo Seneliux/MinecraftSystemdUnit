@@ -34,7 +34,7 @@ Each server has it's own subdirectory of `/opt/minecraft`. This means that when 
 
 3. Upload your files to the `/opt/minecraft/paper` directory from [this PaperMC page](https://papermc.io/downloads) by copying the address of the latest build and download (today is #416, 1.16.4 version):
 ```bash
-curl https://papermc.io/api/v2/projects/paper/versions/1.16.4/builds/416/downloads/paper-1.16.4-416.jar > /opt/minecraft/paper/paper.jar
+wget https://papermc.io/api/v2/projects/paper/versions/1.16.4/builds/416/downloads/paper-1.16.4-416.jar
  ```
 - **Note**: All uploaded files should be owned by the `minecraft` user
 
