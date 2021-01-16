@@ -61,9 +61,6 @@ ExecStart=/bin/sh -c \
           -XX:G1MaxNewSizePercent=80 \
           -XX:G1MixedGCLiveThresholdPercent=50 \
           -XX:+AlwaysPreTouch \
-          -XX:+UseLargePages \
-          -XX:+UseLargePagesInMetaspace \
-          -XX:LargePageSizeInBytes=2m \
           -jar {} \
           nogui'
 
