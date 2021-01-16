@@ -48,8 +48,8 @@ ExecStart=/bin/sh -c \
       /usr/bin/screen -DmS mc-%i \
         /usr/bin/java \
           -server \
-          -Xms${MCMINMEM} \
-          -Xmx${MCMAXMEM} \
+          -Xms:${MCMINMEM} \
+          -Xmx:${MCMAXMEM} \
           -XX:+UseG1GC \
           -XX:+CMSClassUnloadingEnabled \
           -XX:ParallelGCThreads=${PARALLEL_THREADS} \
