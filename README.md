@@ -34,7 +34,7 @@ Each server has it's own subdirectory of `/opt/minecraft`. This means that when 
 
 3. Upload your files to the `/opt/minecraft/paper` directory from [this PaperMC page](https://papermc.io/downloads) by copying the address of the latest build and download (today is #416, 1.16.4 version):
 ```bash
-wget https://papermc.io/api/v2/projects/paper/versions/1.16.4/builds/416/downloads/paper-1.16.4-416.jar
+curl https://papermc.io/api/v2/projects/paper/versions/1.16.4/builds/416/downloads/paper-1.16.4-416.jar > /opt/minecraft/paper/paper.jar
  ```
 - **Note**: All uploaded files should be owned by the `minecraft` user
 
@@ -99,3 +99,27 @@ su -c 'screen -r mc-paper' minecraft
 ```
 
 **Note**: To detach (exit) from the session, press <kbd>CTRL + A</kbd> followed by <kbd>D</kbd>.
+
+## Guest from an outside world
+To connect from the outside world, must open the 25565/tcp port. UFW case:
+```bashapplications.d/
+curl https://raw.githubusercontent.com/Seneliux/MinecraftSystemdUnit/master/ufw_application > /etc/ufw/applications.d/minecraft
+ufw allow minecraft
+```
+If you add another minecraft instance, additionaly add not used ports.
+```bash
+nano /etc/ufw/applications.d/minecraft
+```
+Change line 
+```properties
+ports=25565/tcp
+```
+to 
+```properties
+ports=25565,25566,25567/tcp
+```
+This will open three ports for three different instances. 
+Accordinaly change port in the file `server.conf`in every instance:
+```properties
+server-port=25565
+```
