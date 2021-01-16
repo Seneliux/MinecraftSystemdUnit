@@ -94,7 +94,9 @@ To enter the console, [`screen`](https://linux.die.net/man/1/screen) is used.
 All screen sessions are owned by the `minecraft` user and are prefixed with `mc-`.
 
 ```bash
-# This will attach to the Minecraft server called `ftb-beyond`
+# List all screen sessions:
+screen -ls  
+# This will attach to the Minecraft server called `mc-paper  
 su -c 'screen -r mc-paper' minecraft
 ```
 
