@@ -62,11 +62,11 @@ For huge pages addeed these lines to minecraft server:
 ```
 This will couse warning about error. Setup system huge pages for 3G memory allocated to the minecraft one isntance. Number of huge pages will be:
 ```properties
-3*1024/2+300= 1836  
+3*1024/2+500= 2036  
 ```
-There '300' is extra free. Recommends to add some extra huge pages.  
+There needs to be a bit of wiggle room, so I always add an extra 500 to my final number.
 ```bash
-echo vm.nr_hugepages = 1836 >> /etc/sysctl.conf
+echo vm.nr_hugepages = 2036 >> /etc/sysctl.conf
 ```
 And reboot server. 
 Check Huge Pages usage:
