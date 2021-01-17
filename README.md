@@ -53,6 +53,26 @@ With `mc@.service` it's possible to specify the RAM allocation per server. This 
 MCMINMEM=512M
 MCMAXMEM=2048M
 ```
+#### Performance improvents using huge pages
+For huge pages addeed these lines to minecraft server:  
+```properties
+-XX:+UseLargePages \
+-XX:+UseLargePagesInMetaspace \
+-XX:LargePageSizeInBytes=2m \
+```
+This will couse warning about error. Setup system huge pages for 3G memory allocated to the minecraft one isntance. Number of huge pages will be:
+```properties
+3*1024/2+300= 1836  
+```
+There '300' is extra free. Recommends to add some extra huge pages.  
+```bash
+echo vm.nr_hugepages = 1836 >> /etc/sysctl.conf
+```
+And reboot server. 
+Check Huge Pages usage:
+```bash
+cat /proc/meminfo | grep Huge
+```
 ### CPU cores
 
 Set the number of used CPU cores:
