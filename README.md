@@ -60,7 +60,13 @@ For huge pages addeed these lines to minecraft server:
 -XX:+UseLargePagesInMetaspace \
 -XX:LargePageSizeInBytes=2m \
 ```
-This will couse warning about error. Setup system huge pages for 3G memory allocated to the minecraft one isntance. Number of huge pages will be:
+If system have not (enough) free huge pages, this will couse warning. Without Huge pages, simple delete from systemd unit:
+```bash
+systemctl edit --full mc@service
+```
+
+
+Setup system huge pages for 3G memory allocated to the minecraft one isntance. Number of huge pages will be:
 ```properties
 3*1024/2+500= 2036  
 ```
@@ -69,7 +75,7 @@ There needs to be a bit of wiggle room, so I always add an extra 500 to my final
 echo vm.nr_hugepages = 2036 >> /etc/sysctl.conf
 ```
 And reboot server. 
-Check Huge Pages usage:
+Check Huge Pages usage (after reboot):
 ```bash
 cat /proc/meminfo | grep Huge
 ```
